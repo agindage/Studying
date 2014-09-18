@@ -1,0 +1,99 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<assert.h>
+#define SIZE 26
+
+typedef struct TrieNode
+{
+    int count;
+    struct TrieNode* next[SIZE];       
+}TrieNode;
+
+TrieNode *pRoot;
+
+
+TrieNode* createTrieNode()
+{
+    TrieNode *p=NULL;
+    p=(TrieNode *)malloc(sizeof(TrieNode));
+    if(!p)
+        exit(1);
+    p->count=0;
+    memset(p->next,0,sizeof(TrieNode*)*SIZE);            
+    return p;
+}
+
+void initialTrie()
+{
+    pRoot=createTrieNode();
+    return;     
+}
+
+
+void insertTrieNode(TrieNode *pRoot,char *s)
+{
+    TrieNode *p;
+    int tag;
+    p=pRoot;
+    assert(s!=NULL);
+    while(*s)
+    {
+        tag=*s-'a';
+        if((p->next[tag])==NULL)
+        {
+            p->next[tag]=createTrieNode();                       
+        }
+        (p->count)++;
+        p=p->next[tag]; 
+        s++;                   
+    }
+    (p->count)++; 
+}
+
+int searchTrieNode(TrieNode *pRoot,char *s)
+{
+    TrieNode *p;
+    p=pRoot;
+    int t=0,tag;
+    while(*s)
+    {
+        tag=*s-'a';
+        if(p->next[tag]!=NULL)
+        {
+            p=p->next[tag];
+            t=p->count;
+        }
+        else
+        {
+            return 0; 
+        }
+        s++;             
+    } 
+    return t;  
+}
+
+int main()
+{
+    char a[50];
+    int i,n,m;
+    pRoot=NULL;
+    initialTrie();
+    while(scanf("%d",&n)!=EOF)
+    {
+        for(i=0;i<n;i++)
+        {
+            scanf("%s",a);
+            insertTrieNode(pRoot,a);        
+        } 
+        scanf("%d",&n); 
+        for(i=0;i<n;i++)
+        {
+            scanf("%s",a);
+            m=searchTrieNode(pRoot,a); 
+            printf("%d\n",m);       
+        }                        
+    }
+    system("pause");
+    return 0;    
+}
