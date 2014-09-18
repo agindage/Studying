@@ -1,0 +1,16 @@
+#include<iostream>
+#include<stdlib.h>
+#include<map>
+using namespace std;
+int main()
+{
+    map <string,int> M;
+    map <string,int>::iterator i;
+    M["12"]++;
+    M["67"]++;
+    M["66"]++;
+    for(i=M.begin();i!=M.end();++i)
+        cout<<i->first<<" "<<i->second<<endl;
+    system("pause");   
+    return 0;
+}
