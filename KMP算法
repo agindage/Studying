@@ -1,0 +1,90 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define MAX 100
+void calNext(char *a,int *next)
+{
+    int i,j,lena;
+    lena=strlen(a);
+    next[0]=-1;
+    next[1]=0;
+    i=1;
+    j=0;
+    while(i<lena-1)
+    {
+        if(a[i]==a[j] || j==-1)
+        {
+            i++;
+            j++;
+            if(a[i]==a[j])
+            {
+                next[i]=next[j];              
+            }
+            else
+            {
+                next[i]=j;     
+            }
+                         
+        }
+        else
+        {
+            j=next[j];    
+        }             
+    }
+         
+}
+int match(char *a,char *b,int *next,int n)
+{
+    int i,j,lena,lenb;
+    lena=strlen(a);
+    lenb=strlen(b);
+    i=0;
+    j=n;
+    
+    while(b[j] && a[i])
+    {
+        if(i==-1 || a[i]==b[j]) i++,j++;
+        else
+        {
+            i=next[i]; 
+        }     
+    }
+    if(i>=lena)
+    {
+        return j-lena;           
+    }  
+    return -2;  
+}
+
+int main()
+{
+    char a[MAX],b[MAX];
+    int next[MAX];
+    int i,lena,lenb,m,n,t=0,p=0;
+    while(scanf("%d",&n)!=EOF)
+    {
+        for(i=0;i<n;i++)
+        {
+            scanf("%s %s",a,b);
+            calNext(a,next);
+            for(i=0;i<strlen(a);i++)
+            {
+                printf("%d",next[i]);                         
+            }
+            printf("\n");
+            
+            t=0;
+            m=-1;
+            while(m!=-2)
+            {
+                t++;
+                p=m+1;
+                m=match(a,b,next,p);                           
+            }
+            printf("%d\n",t-1);                  
+        }
+                                
+    }
+    system("pause");
+    return 0;         
+}
