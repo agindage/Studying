@@ -1,0 +1,37 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int maxValue(int n,int m,int *need,int *value,int *a)
+{
+    int i,j,k;
+    for(i=0;i<n;i++)
+    {
+        for(k=0;k<=m;k++)//若是01背包问题，则改为k=m作为初始值 
+        {
+            if(k>=need[i])
+            a[k]=(a[k-need[i]]+value[i]> a[k]) ? a[k-need[i]]+value[i] : a[k];
+        }          
+    }
+    return a[m];    
+}
+int main()
+{
+    int m,n,i,j;
+    int *need,*value,*a;
+    while(scanf("%d %d",&n,&m)!=EOF)
+    {
+        need=(int*)malloc(sizeof(int)*n);
+        value=(int*)malloc(sizeof(int)*n);
+        a=(int*)malloc(sizeof(int)*m);
+        memset(a,0,sizeof(int)*m);  
+        for(i=0;i<n;i++)
+        {
+            scanf("%d %d",&need[i],&value[i]);
+        }
+        printf("%d",maxValue(n,m,need,value,a));
+        free(need);
+        free(value);         
+    }
+    return 0;    
+}
