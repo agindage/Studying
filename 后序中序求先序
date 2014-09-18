@@ -1,0 +1,31 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+void preOrder(char a[],char b[],int al,int ar,int bl,int br)
+{
+    int i=0;
+    if(bl==br)
+    {
+        printf("%c",b[bl]);
+        return;          
+    }
+    while(b[i]!=a[br]) i++;
+    printf("%c",b[i]);
+    if(i>bl)
+    preOrder(a,b,al,i-1,bl,i-1);
+    if(i<br) 
+    preOrder(a+i,b+i+1,0,ar-i-1,0,br-i-1);     
+}
+int main()
+{
+    char a[100],b[100];
+    while(scanf("%s%s",a,b)!=EOF)
+    {
+        int alen=strlen(a);//后序 
+        int blen=strlen(b);//中序    
+        preOrder(a,b,0,alen-1,0,blen-1);
+        printf("\n");                         
+    }
+    system("pause");
+    return 0;    
+}
