@@ -1,0 +1,16 @@
+#include<iostream>
+#include<stdlib.h>
+#include<set>
+using namespace std;
+int main()
+{
+    set <char> myChar;
+    set <char>::iterator i;
+    myChar.insert(65);
+    myChar.insert(67);
+    myChar.insert(66);
+    for(i=myChar.begin();i!=myChar.end();++i) 
+        printf("%c",*i);
+    system("pause");   
+    return 0;
+}
