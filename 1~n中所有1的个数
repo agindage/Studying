@@ -1,0 +1,42 @@
+#include<stdio.h>
+#include<stdlib.h>
+int sum1s(int t)
+{
+    int high1,nall,low,lowNum,n;
+    high1=10;//当前最高位1的个数
+    nall=1;//低n-1位所以1个个数
+    lowNum=n=0;//低n-1为的十进制值
+    low=t%10;//当前最低位
+    t=t/10;
+    lowNum=low;
+    if(low>=1)
+        n=1;
+    while(t)
+    {
+        low=t%10;
+        t=t/10;
+        switch(low)
+        {
+            case 0:
+                break;
+            case 1:
+                n=lowNum+1+nall+n;
+                break;
+            default:
+                n=high1+low*nall+n;
+                          
+        }
+        lowNum=low*high1+lowNum;
+        nall=high1+10*nall;
+        high1*=10;
+    } 
+    return n;  
+}
+int main()
+{
+    int t;
+    while(scanf("%d",&t)!=EOF)
+        printf("%d\n",sum1s(t));
+    system("pause");
+    return 0;    
+}
