@@ -1,0 +1,45 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define N 100
+#define MAX 1000
+#define MIN(x,y) ((x)>(y)?(y):(x))
+int isOk[N][MAX];//isOk[n][s]表示任意n个数的和为s的情况是否存在 ，而且第n行保存了集合中所有n个数组合的情况 
+int arrayDivide(int a[],int n,int sum)
+{
+    int i,j,k;
+    memset(isOk,0,sizeof(isOk));
+    isOk[0][0]=1;
+    for(i=1;i<=2*n;i++)
+    {
+        for(j=MIN(i,n);j>=1;j--)
+        {
+            for(k=a[i];k<=sum;k++)
+            {
+                if(isOk[j-1][k-a[i]])
+                    isOk[j][k]=1;                      
+            }                 
+        }                  
+    }
+    for(i=sum;i>0&&!isOk[n][i];i--)
+        ;
+    return i;
+}
+int main()
+{
+    int i,j,n,sum,max;
+    int a[N];
+    while(scanf("%d",&n)!=EOF)
+    {
+        max=0;
+        for(i=1;i<=2*n;i++)
+        {
+            scanf("%d",&a[i]);
+            max+=a[i];                
+        }
+        sum=arrayDivide(a,n,max/2);
+        printf("%d %d\n",sum,max);     
+    }
+    system("pause");
+    return 0;    
+}
