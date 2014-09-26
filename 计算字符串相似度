@@ -1,0 +1,55 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define N 100
+unsigned int best[N][N];
+int calStrDis(char a[],int aBegin,int aEnd,char b[],int bBegin,int bEnd)
+{
+    int t1,t2,t3,min;
+    if(aBegin>=aEnd)
+    {
+        return bEnd-bBegin;               
+    }
+    else if(bBegin>=bEnd)
+    {
+        return aEnd-aBegin;     
+    }
+    if(a[aBegin]==b[bBegin])
+    {
+        return calStrDis(a,aBegin+1,aEnd,b,bBegin+1,bEnd);                        
+    }
+    else
+    {
+        if(best[aBegin][bBegin]==0xffffffff)//判断是否为重复计算，如果是则直接取值，减少运算量 
+        {
+            t1=calStrDis(a,aBegin,aEnd,b,bBegin+1,bEnd)+1;
+            t2=calStrDis(a,aBegin+1,aEnd,b,bBegin,bEnd)+1;
+            t3=calStrDis(a,aBegin+1,aEnd,b,bBegin+1,bEnd)+1;
+            min=t1<t2?t1:t2;
+            min=t3<min?t3:min;
+            best[aBegin][bBegin]=min;                           
+        }
+        else
+        {
+            min=best[aBegin][bBegin];    
+        }
+        
+        return min;    
+    }    
+    
+}
+int main()
+{
+    char a[N],b[N];
+    int alen,blen,sim;
+    while(scanf("%s",a) && scanf("%s",b))
+    {
+        alen=strlen(a);
+        blen=strlen(b);
+        memset(best,0xff,sizeof(best));
+        sim=calStrDis(a,0,alen,b,0,blen);                    
+        printf("%d\n",sim);
+    }
+    system("pause");
+    return 0;    
+}
