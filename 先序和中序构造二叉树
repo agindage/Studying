@@ -7,7 +7,7 @@ struct Node
     struct Node *left;
     struct Node *right;       
 }; 
-struct Node* createTree(char a[],char b[],int al,int ar,int bl,int br)
+struct Node* createTree(char a[],char b[],int n)
 {
     int i=0;
     struct Node *p=NULL;
@@ -19,18 +19,18 @@ struct Node* createTree(char a[],char b[],int al,int ar,int bl,int br)
     }
     p->left=NULL;
     p->right=NULL;
-    if(bl==br)
+    if(0==n)
     {
-        printf("%c",b[bl]);
-        p->value=b[bl];
+        printf("%c",b[n]);
+        p->value=b[n];
         return p;               
     }
-    while(b[i]!=a[al]) i++;
+    while(b[i]!=a[0]) i++;
     p->value=b[i];//子树根节点
-    if(i>bl)
-        p->left=createTree(a+1,b,0,i-1,0,i-1);
-    if(i<br)
-        p->right=createTree(a+i+1,b+i+1,0,ar-i-1,0,br-i-1);
+    if(i>0)
+        p->left=createTree(a+1,b,i-1);
+    if(i<n)
+        p->right=createTree(a+i+1,b+i+1,n-i-1);
     printf("%c",b[i]);
     return p;
 } 
@@ -67,7 +67,7 @@ int main()
     {
         alen=strlen(a);//先序 
         blen=strlen(b);//中序 
-        root=createTree(a,b,0,alen-1,0,blen-1);
+        root=createTree(a,b,alen-1);
         printf("\n");
         printf("preOder:");
         preOrder(root); 
