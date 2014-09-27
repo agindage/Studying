@@ -11,30 +11,22 @@ struct Node* createTree(char a[],char b[],int al,int ar,int bl,int br)
 {
     int i=0;
     struct Node *p=NULL;
+    p=(struct Node*)malloc(sizeof(struct Node));
+    if(NULL==p) 
+    {
+        perror("faileed");
+        exit(-1);            
+    }
+    p->left=NULL;
+    p->right=NULL;
     if(bl==br)
     {
         printf("%c",b[bl]);
-        p=(struct Node*)malloc(sizeof(struct Node));
-        if(NULL==p) 
-        {
-            perror("faileed");
-            exit(-1);            
-        }
         p->value=b[bl];
-        p->left=NULL;
-        p->right=NULL;
         return p;               
     }
     while(b[i]!=a[al]) i++;
-    p=(struct Node*)malloc(sizeof(struct Node));
-    if(NULL==p)
-    {
-        perror("failed");           
-        exit(-1);
-    }
     p->value=b[i];//子树根节点
-    p->left=NULL;
-    p->right=NULL;    
     if(i>bl)
         p->left=createTree(a+1,b,0,i-1,0,i-1);
     if(i<br)
