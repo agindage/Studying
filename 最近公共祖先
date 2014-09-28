@@ -1,0 +1,147 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define N 200
+#define M 200
+struct Node
+{
+    char a[N];
+    int numChild;
+    struct Node *father;
+    struct Node *child[N];       
+};
+struct Node* searchFather(struct Node *ancient,char father[])
+{
+    int i;
+    int num=ancient->numChild;
+    struct Node *p;
+    if(0==strcmp(ancient->a,father))
+    {
+        return ancient;                         
+    }
+    else
+    {
+        for(i=0;i<num;i++)
+        {
+            p=searchFather(ancient->child[i],father);   
+            if(p!=NULL)
+                return p;
+        } 
+    }
+    return NULL;       
+}
+int insertNode(struct Node *ancient[],int* numAncient,char father[],char child[])
+{
+    struct Node *p=NULL,*temp;
+    int i;
+    for(i=0;i<*numAncient;i++)
+    {
+        p=searchFather(ancient[i],father);
+        if(p!=NULL)
+            break;        
+    }
+    temp=(struct Node*)malloc(sizeof(struct Node));
+    if(NULL==temp)
+    {
+        perror("failed");
+        exit(-1);              
+    }
+    memset(temp,0,sizeof(struct Node));
+    if(NULL==p)//如果父节点不存在则先插入父节点 
+    {
+        ancient[(*numAncient)++]=temp;
+        strcpy(temp->a,father);
+        return 0;
+    }
+    else
+    {
+        p->child[p->numChild++]=temp;
+        temp->father=p;    
+        strcpy(temp->a,child);   
+    }
+    return 1;      
+}
+void searchSameAncient(struct Node *ancient[],int numAncient,char father[],char child[])
+{
+    struct Node *pf,*pc; 
+    char a[M][N],b[M][N];
+    int i,ia,ib,flag;
+    ia=ib=flag=0;
+    pf=pc=NULL;
+    for(i=0;i<numAncient;i++)
+    {
+        pf=searchFather(ancient[i],father);
+        if(pf!=NULL)
+            break;        
+    }
+    if(pf!=NULL)
+    {
+        strcpy(a[ia++],pf->a);
+        while(pf->father!=NULL)
+        {
+            pf=pf->father;
+            strcpy(a[ia++],pf->a);
+        }           
+    }
+    for(i=0;i<numAncient;i++)
+    {
+        pc=searchFather(ancient[i],child);
+        if(pc!=NULL)
+            break;        
+    }
+    if(pc!=NULL)
+    {
+        strcpy(b[ib++],pc->a);
+        while(pc->father!=NULL)
+        {
+            pc=pc->father;
+            strcpy(b[ib++],pc->a);
+        }           
+    }
+    ia--;
+    ib--;
+    while(ia>=0 && ib>=0 && 0==strcmp(a[ia],b[ib]))
+    {
+        ia--;
+        ib--;
+        flag=1;                             
+    }
+    if(NULL==pf || NULL==pc)
+    {
+        printf("-1\n");
+        return;            
+    }
+    else if(flag)
+        printf("%s\n",a[ia+1]);
+    else 
+        printf("-1\n");     
+}
+int main()
+{
+    int i,n,numAncient;
+    char father[N],child[N];
+    struct Node *ancient[M],*p;
+    memset(ancient,0,sizeof(ancient));
+    numAncient=0;
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        scanf("%s %s",father,child);
+        if(0==insertNode(ancient,&numAncient,father,child))
+        {
+            insertNode(ancient,&numAncient,father,child);                                                   
+        }
+    }
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        scanf("%s %s",father,child);
+        if(0==strcmp(father,child))
+            printf("%s",father);
+        else
+            searchSameAncient(ancient,numAncient,father,child);                
+    }
+    
+    system("pause");
+    return 0;    
+}
