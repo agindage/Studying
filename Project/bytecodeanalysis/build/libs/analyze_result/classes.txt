@@ -1,0 +1,517 @@
+public com.tencent.qqmini.sdk.core.AdFrequencyLimit{
+    public static void setOnStartTime(long);
+}
+public abstract com.tencent.qqmini.sdk.core.BaseRuntime{
+    public void <init>();
+    public abstract void onAppAttachWindow(android.app.Activity,android.view.ViewGroup);
+    public abstract void onAppDetachWindow(android.app.Activity);
+    public abstract void loadMiniApp(com.tencent.qqmini.sdk.launcher.model.MiniAppInfo,java.lang.String);
+    public abstract com.tencent.qqmini.sdk.core.IPage getPage();
+    public abstract com.tencent.qqmini.sdk.core.IJsService getJsService();
+}
+public interface abstract com.tencent.qqmini.sdk.core.IJsService{
+    public abstract void evaluateSubscribeJS(java.lang.String,java.lang.String,int);
+}
+public interface abstract com.tencent.qqmini.sdk.core.IMiniAppContext{
+    public abstract android.content.Context getContext();
+    public abstract android.app.Activity getAttachedActivity();
+    public abstract com.tencent.qqmini.sdk.launcher.model.MiniAppInfo getMiniAppInfo();
+    public abstract boolean isMiniGame();
+    public abstract boolean isOrientationLandscape();
+    public abstract java.lang.Object sendRuntimeMessage(com.tencent.qqmini.sdk.core.message.RuntimeMessage);
+}
+public com.tencent.qqmini.sdk.core.IMiniRuntimeImpl{
+    public void <init>(com.tencent.qqmini.sdk.core.IMiniAppContext);
+}
+public com.tencent.qqmini.sdk.core.MiniAppEnv{
+    public static com.tencent.qqmini.sdk.core.MiniAppEnv g();
+    public android.content.Context getContext();
+    public com.tencent.qqmini.sdk.launcher.shell.BaselibLoader getBaselibLoader();
+    public com.tencent.qqmini.sdk.core.auth.AuthState getAuthSate(java.lang.String);
+    public void setMenuStyle(java.lang.String);
+}
+public abstract com.tencent.qqmini.sdk.core.ReportConst{
+    public static com.tencent.qqmini.sdk.launcher.model.MiniAppInfo miniAppConfigForPreload();
+}
+public com.tencent.qqmini.sdk.core.auth.AuthFilterList{
+    public static boolean isAppInWhiteList(java.lang.String);
+}
+public com.tencent.qqmini.sdk.core.auth.AuthState{
+    public boolean isPermissionGranted(java.lang.String);
+    public void setAuthState(java.lang.String,boolean);
+}
+public com.tencent.qqmini.sdk.core.auth.PermissionInfo{
+    public java.lang.String name;
+    public java.lang.String description;
+}
+public com.tencent.qqmini.sdk.core.auth.PermissionManager{
+    public static com.tencent.qqmini.sdk.core.auth.PermissionManager g();
+    public com.tencent.qqmini.sdk.core.auth.PermissionInfo getScopePermission(java.lang.String);
+}
+public com.tencent.qqmini.sdk.core.cache.Storage{
+    public static long getCurrentStorageSize(java.lang.String);
+}
+public com.tencent.qqmini.sdk.core.manager.ApkgManager{
+    public static com.tencent.qqmini.sdk.core.manager.ApkgManager g();
+    public void loadApkg(android.content.Context,boolean,com.tencent.qqmini.sdk.launcher.model.MiniAppBaseInfo,com.tencent.qqmini.sdk.core.manager.ApkgManager$OnLoadApkgInfoListener);
+    public void downloadSubPack(com.tencent.qqmini.sdk.launcher.model.MiniAppInfo,java.lang.String,com.tencent.qqmini.sdk.core.manager.ApkgManager$OnLoadApkgInfoListener);
+}
+public com.tencent.qqmini.sdk.core.manager.GameVideoPlayerManager{
+    public static com.tencent.qqmini.sdk.core.manager.GameVideoPlayerManager getInstance();
+    public void init(android.app.Activity,android.view.ViewGroup);
+}
+public com.tencent.qqmini.sdk.core.manager.MiniAppFileManager{
+    public static com.tencent.qqmini.sdk.core.manager.MiniAppFileManager getInstance();
+    public void initFileManager(com.tencent.qqmini.sdk.launcher.model.ApkgBaseInfo,boolean);
+    public void deleteTmpFileNeed2DeleteAsync();
+    public java.lang.String getAbsolutePath(java.lang.String);
+    public java.lang.String getTmpPath(java.lang.String);
+    public java.lang.String getWxFilePath(java.lang.String);
+    public java.lang.String getTmpPathByUrl(java.lang.String);
+}
+public com.tencent.qqmini.sdk.core.manager.ThreadManager{
+    public static android.os.Handler getSubThreadHandler();
+    public static android.os.Handler getFileThreadHandler();
+    public static android.os.Handler getUIHandler();
+    public static void execute(java.lang.Runnable,int,com.tencent.qqmini.sdk.core.manager.ThreadManager$IThreadListener,boolean);
+}
+public com.tencent.qqmini.sdk.core.manager.WxapkgUnpacker{
+    public static boolean unpackSync(java.lang.String,java.lang.String);
+    public static boolean unpackSync(java.lang.String,java.lang.String,java.lang.String,boolean);
+}
+public com.tencent.qqmini.sdk.core.message.AppStateEvent{
+    public static com.tencent.qqmini.sdk.core.message.AppStateEvent obtain(int);
+    public static com.tencent.qqmini.sdk.core.message.AppStateEvent obtain(int,java.lang.Object);
+}
+public com.tencent.qqmini.sdk.core.message.GetPageId{
+    public static com.tencent.qqmini.sdk.core.message.GetPageId obtain();
+}
+public com.tencent.qqmini.sdk.core.message.GetShareState{
+    public static com.tencent.qqmini.sdk.core.message.GetShareState obtain();
+}
+public com.tencent.qqmini.sdk.core.message.NativeViewRequestEvent{
+    public int dispatchTarget;
+    public static com.tencent.qqmini.sdk.core.message.NativeViewRequestEvent obtain(com.tencent.qqmini.sdk.core.model.RequestEvent,int);
+    public void sendSubscribeJs(java.lang.String,java.lang.String,int);
+}
+public com.tencent.qqmini.sdk.core.message.SubscribeEvent{
+    public static com.tencent.qqmini.sdk.core.message.SubscribeEvent obtain(java.lang.String,java.lang.String,int);
+}
+public com.tencent.qqmini.sdk.core.model.ApkgInfo$PageHtmlContent{
+    public java.lang.String jsStr;
+}
+public com.tencent.qqmini.sdk.core.model.ApkgInfo{
+    public com.tencent.qqmini.sdk.launcher.model.AppConfigInfo mAppConfigInfo;
+    public void <init>(java.lang.String,com.tencent.qqmini.sdk.launcher.model.MiniAppBaseInfo);
+    public java.lang.String getPageJsStr(java.lang.String);
+    public com.tencent.qqmini.sdk.launcher.model.AppConfigInfo getAppConfigInfo();
+    public java.lang.String getAppServiceJsPath();
+    public boolean isUrlResReady(java.lang.String,com.tencent.qqmini.sdk.launcher.model.MiniAppBaseInfo);
+    public java.lang.String getRootPath(java.lang.String);
+    public java.lang.String getAppServiceJsContent(java.lang.String);
+    public static java.lang.String getBasePageFrameStr();
+    public com.tencent.qqmini.sdk.core.model.ApkgInfo$PageHtmlContent getPageHtmlContent();
+    public java.lang.String getRootWxssJsContent();
+    public java.lang.String getPageFrameJSStr(java.lang.String);
+    public boolean isTabBarPage(java.lang.String);
+    public boolean isHomePage(java.lang.String);
+    public boolean isUrlFileExist(java.lang.String);
+}
+public com.tencent.qqmini.sdk.core.model.RequestEvent$Builder{
+    public void <init>();
+    public com.tencent.qqmini.sdk.core.model.RequestEvent$Builder setEvent(java.lang.String);
+    public com.tencent.qqmini.sdk.core.model.RequestEvent$Builder setJsonParams(java.lang.String);
+    public com.tencent.qqmini.sdk.core.model.RequestEvent$Builder setJsService(com.tencent.qqmini.sdk.core.IJsService);
+    public com.tencent.qqmini.sdk.core.model.RequestEvent$Builder setCallbackId(int);
+    public com.tencent.qqmini.sdk.core.model.RequestEvent build();
+}
+public com.tencent.qqmini.sdk.core.model.RequestEvent{
+    public java.lang.String event;
+    public java.lang.String jsonParams;
+    public com.tencent.qqmini.sdk.core.IJsService jsService;
+    public int callbackId;
+    public java.lang.String ok();
+    public java.lang.String ok(org.json.JSONObject);
+    public java.lang.String fail(org.json.JSONObject,java.lang.String);
+    public java.lang.String fail();
+    public java.lang.String fail(java.lang.String);
+    public java.lang.String cancel();
+    public java.lang.String cancel(org.json.JSONObject);
+}
+public abstract com.tencent.qqmini.sdk.core.plugins.BaseJsPlugin{
+    public void <init>();
+    public void onCreate(com.tencent.qqmini.sdk.core.IMiniAppContext);
+    public boolean onInterceptJsEvent(com.tencent.qqmini.sdk.core.model.RequestEvent);
+    public void onDestroy();
+}
+public com.tencent.qqmini.sdk.core.plugins.QQFriendJsPlugin{
+    public static void doAddFriend(android.content.Context,java.lang.String,java.lang.String,com.tencent.qqmini.sdk.core.plugins.QQFriendJsPlugin$IAddFriendCallBack);
+}
+public interface abstract com.tencent.qqmini.sdk.core.plugins.engine.IJsPluginEngine{
+    public abstract java.lang.String handleNativeRequest(java.lang.String,java.lang.String,com.tencent.qqmini.sdk.core.IJsService,int);
+}
+public com.tencent.qqmini.sdk.core.plugins.engine.JsPluginEngine{
+    public void <init>(android.content.Context);
+    public void onCreate(com.tencent.qqmini.sdk.core.IMiniAppContext);
+    public void onResume();
+    public void onPause();
+    public void onDestroy();
+}
+public com.tencent.qqmini.sdk.core.proxy.ProxyManager{
+    public static java.lang.Object get(java.lang.Class);
+}
+public interface abstract com.tencent.qqmini.sdk.core.tissue.TissueEnv{
+    public abstract java.lang.String getNativeLibDir();
+}
+public com.tencent.qqmini.sdk.core.tissue.TissueGlobal{
+    public static com.tencent.qqmini.sdk.core.tissue.TissueEnv tissueEnv;
+    public static boolean verifyTissueEngine(java.lang.String);
+}
+public final com.tencent.qqmini.sdk.core.utils.ApiUtil{
+    public static org.json.JSONObject wrapCallbackOk(java.lang.String,org.json.JSONObject);
+    public static org.json.JSONObject wrapCallbackFail(java.lang.String,org.json.JSONObject);
+    public static org.json.JSONObject wrapCallbackFail(java.lang.String,org.json.JSONObject,java.lang.String);
+}
+public com.tencent.qqmini.sdk.core.utils.AppBrandTask{
+    public static void runTaskOnUiThread(java.lang.Runnable);
+    public static void runTaskOnUiThreadDelay(java.lang.Runnable,long);
+}
+public com.tencent.qqmini.sdk.core.utils.AppBrandUtil{
+    public static java.lang.String getUrlWithoutParams(java.lang.String);
+    public static org.json.JSONObject getPageLoadInfo(java.lang.String,java.lang.String,com.tencent.qqmini.sdk.launcher.model.MiniAppInfo);
+    public static int getWikiScene(int);
+    public static org.json.JSONObject getAppLaunchInfo(java.lang.String,com.tencent.qqmini.sdk.launcher.model.MiniAppInfo);
+    public static boolean needUpdate(com.tencent.qqmini.sdk.launcher.model.MiniAppInfo,com.tencent.qqmini.sdk.launcher.model.MiniAppInfo);
+}
+public com.tencent.qqmini.sdk.core.utils.DeviceUtil{
+    public static int getDeviceBenchmarkLevel();
+}
+public com.tencent.qqmini.sdk.core.utils.DialogUtil{
+    public static com.tencent.qqmini.sdk.core.widget.QQCustomDialog createCustomDialog(android.content.Context,int);
+    public static com.tencent.qqmini.sdk.core.widget.QQCustomDialog createCustomDialog(android.content.Context,int,java.lang.String,java.lang.String,int,int,android.content.DialogInterface$OnClickListener,android.content.DialogInterface$OnClickListener);
+    public static com.tencent.qqmini.sdk.core.widget.QQCustomDialog createCustomDialog(android.content.Context,int,java.lang.String,java.lang.CharSequence,java.lang.String,java.lang.String,android.content.DialogInterface$OnClickListener,android.content.DialogInterface$OnClickListener);
+}
+public com.tencent.qqmini.sdk.core.utils.EditAreaAnimatorUtil{
+    public static void editAreaAnimator(android.view.View,float,float,float,float);
+}
+public com.tencent.qqmini.sdk.core.utils.FileUtils{
+    public static void delete(java.lang.String,boolean);
+    public static boolean deleteFile(java.lang.String);
+    public static java.lang.String readFileToString(java.io.File);
+    public static boolean writeFile(java.lang.String,java.lang.String);
+    public static java.lang.String readFileFromAssets(android.content.Context,java.lang.String);
+    public static boolean writeFile(byte[],java.lang.String);
+}
+public com.tencent.qqmini.sdk.core.utils.ImageUtil{
+    public static android.graphics.Bitmap drawableToBitmap(android.graphics.drawable.Drawable);
+    public static boolean isJpgFile(java.lang.String);
+    public static boolean isPngFile(java.lang.String);
+    public static java.io.InputStream getLocalImageStream(java.lang.String,boolean);
+    public static java.io.ByteArrayInputStream getLocalNoBitmapImageStream(java.lang.String);
+    public static android.graphics.Bitmap getLocalBitmap(java.lang.String);
+}
+public com.tencent.qqmini.sdk.core.utils.JSONUtil{
+    public static (Lorg/json/JSONObject;Ljava/lang/String;)[[Ljava/lang/String;;
+    public static (Lorg/json/JSONArray;)[Ljava/lang/String;;
+    public static (Lorg/json/JSONArray;)[I;
+    public static org.json.JSONObject parse(java.lang.String);
+    public static java.util.Map toMap(org.json.JSONObject);
+}
+public com.tencent.qqmini.sdk.core.utils.NativeBuffer{
+    public static int TYPE_BUFFER_NATIVE;
+    public byte[] buf;
+    public static com.tencent.qqmini.sdk.core.utils.NativeBuffer unpackNativeBuffer(com.tencent.qqmini.sdk.core.IMiniAppContext,org.json.JSONObject,java.lang.String);
+    public static void packNativeBuffer(com.tencent.qqmini.sdk.core.IMiniAppContext,byte[],int,java.lang.String,org.json.JSONObject);
+    public static void packNativeBuffer(com.tencent.qqmini.sdk.core.IMiniAppContext,byte[],int,int,int,java.lang.String,org.json.JSONObject);
+}
+public com.tencent.qqmini.sdk.core.utils.NavigateBackUtils{
+    public static void writeTagAppid(java.lang.String);
+}
+public com.tencent.qqmini.sdk.core.utils.NetworkUtil{
+    public static int getActiveNetworkType(android.content.Context);
+}
+public interface abstract com.tencent.qqmini.sdk.core.utils.SoftKeyboardStateHelper$SoftKeyboardStateListener{
+    public abstract void onSoftKeyboardOpened(int);
+    public abstract void onSoftKeyboardClosed();
+}
+public com.tencent.qqmini.sdk.core.utils.SoftKeyboardStateHelper{
+    public void <init>(android.view.View);
+    public void addSoftKeyboardStateListener(com.tencent.qqmini.sdk.core.utils.SoftKeyboardStateHelper$SoftKeyboardStateListener);
+}
+public com.tencent.qqmini.sdk.core.utils.StringUtil{
+    public static boolean isEmpty(java.lang.String);
+}
+public com.tencent.qqmini.sdk.core.utils.WnsConfig{
+    public static final java.lang.String getConfig(java.lang.String,java.lang.String);
+    public static final java.lang.String getConfig(java.lang.String,java.lang.String,java.lang.String);
+    public static int getConfig(java.lang.String,java.lang.String,int);
+    public static long getConfig(java.lang.String,java.lang.String,long);
+    public static boolean getConfig(java.lang.String,java.lang.String,boolean);
+}
+public com.tencent.qqmini.sdk.core.utils.thread.NioSelectorThread{
+    public static com.tencent.qqmini.sdk.core.utils.thread.NioSelectorThread getInstance();
+    public void registerChannel(java.nio.channels.SelectableChannel,int,com.tencent.qqmini.sdk.core.utils.thread.NioSelectorThread$NioHandler);
+}
+public com.tencent.qqmini.sdk.core.widget.AuthDialog{
+    public void <init>(android.content.Context);
+    public void show(android.graphics.drawable.Drawable,java.lang.String,java.lang.String,android.graphics.drawable.Drawable,java.lang.String,java.lang.String,java.lang.String,android.view.View$OnClickListener,java.lang.String,android.view.View$OnClickListener);
+    public boolean isConfirm();
+    public boolean isRefuse();
+    public void setConfirm(boolean);
+    public void setRefuse(boolean);
+}
+public com.tencent.qqmini.sdk.core.widget.CapsuleButton{
+    public void <init>(android.content.Context);
+    public android.widget.ImageView getMoreView();
+    public void changeNavIcon(int);
+    public com.tencent.qqmini.sdk.core.widget.CapsuleButton setListener(com.tencent.qqmini.sdk.core.widget.CapsuleButton$CapsuleBtnClickListener);
+}
+public com.tencent.qqmini.sdk.core.widget.CapsuleButtonClickListener{
+    public void <init>(com.tencent.qqmini.sdk.core.IMiniAppContext);
+}
+public com.tencent.qqmini.sdk.core.widget.CoverView{
+}
+public com.tencent.qqmini.sdk.core.widget.NavigationBar{
+    public void <init>(android.content.Context);
+    public com.tencent.qqmini.sdk.core.widget.NavigationBar setBarStyle(java.lang.String);
+    public com.tencent.qqmini.sdk.core.widget.NavigationBar setWindowInfo(com.tencent.qqmini.sdk.launcher.model.WindowInfo,android.app.Activity);
+    public void setUseCustomStatusBarStyle(boolean);
+    public void showLoading();
+    public void hideLoading();
+    public com.tencent.qqmini.sdk.core.widget.NavigationBar setNavBackgroundColor(int);
+    public com.tencent.qqmini.sdk.core.widget.NavigationBar setNavBackgroundColor(int,long,java.lang.String);
+    public com.tencent.qqmini.sdk.core.widget.NavigationBar setTextStyle(java.lang.String);
+    public com.tencent.qqmini.sdk.core.widget.NavigationBar setTitleText(java.lang.String);
+    public com.tencent.qqmini.sdk.core.widget.NavigationBar setEnableBackIcon(boolean);
+    public com.tencent.qqmini.sdk.core.widget.CapsuleButton getCapsuleButton();
+    public static int getDefaultNaviBarHeight(android.content.Context);
+    public com.tencent.qqmini.sdk.core.widget.NavigationBar setClickBackListener(com.tencent.qqmini.sdk.core.widget.NavigationBar$NavBarBackListener);
+}
+public com.tencent.qqmini.sdk.core.widget.QQCustomDialog{
+    public void <init>(android.content.Context,int);
+    public void setContentView(int);
+    public android.widget.TextView getBtnight();
+    public com.tencent.qqmini.sdk.core.widget.QQCustomDialog setTitle(java.lang.String);
+    public com.tencent.qqmini.sdk.core.widget.QQCustomDialog setMessage(java.lang.CharSequence);
+    public com.tencent.qqmini.sdk.core.widget.QQCustomDialog setNegativeButton(java.lang.String,android.content.DialogInterface$OnClickListener);
+    public com.tencent.qqmini.sdk.core.widget.QQCustomDialog setNegativeButton(java.lang.String,int,android.content.DialogInterface$OnClickListener);
+    public com.tencent.qqmini.sdk.core.widget.QQCustomDialog setPositiveButton(java.lang.String,android.content.DialogInterface$OnClickListener);
+    public com.tencent.qqmini.sdk.core.widget.QQCustomDialog setPositiveButton(java.lang.String,int,android.content.DialogInterface$OnClickListener);
+    public com.tencent.qqmini.sdk.core.widget.QQCustomDialog addView(android.view.View,android.widget.LinearLayout$LayoutParams);
+}
+public com.tencent.qqmini.sdk.core.widget.QQToast{
+    public android.widget.Toast show();
+    public static com.tencent.qqmini.sdk.core.widget.QQToast makeText(android.content.Context,java.lang.CharSequence,int);
+}
+public com.tencent.qqmini.sdk.core.widget.SquareImageView{
+    public void setRoundRect(int);
+}
+public com.tencent.qqmini.sdk.core.widget.TabBar{
+    public void <init>(android.content.Context);
+    public boolean getNeedShow();
+    public void setInfo(com.tencent.qqmini.sdk.launcher.model.TabBarInfo);
+    public void setTabBarStyle(java.lang.String,java.lang.String,java.lang.String,java.lang.String);
+    public void setTabBarItem(int,java.lang.String,android.graphics.Bitmap,android.graphics.Bitmap);
+    public void showTabBarRedDot(int);
+    public void showTabBar(boolean);
+    public void hideTabBar(boolean);
+    public void setTabSelected(java.lang.String);
+    public void hideTabBarRedDot(int);
+    public void hideBadge(int);
+    public void removeTabBarBadge(int);
+    public void setTabBarBadge(int,java.lang.String);
+    public static int getDefaultTabBarHeight(android.content.Context);
+    public void setOnTabItemClickListener(com.tencent.qqmini.sdk.core.widget.TabBar$OnTabItemClickListener);
+}
+public com.tencent.qqmini.sdk.ipc.AppBrandCmdProxy{
+    public static com.tencent.qqmini.sdk.ipc.AppBrandCmdProxy g();
+}
+public com.tencent.qqmini.sdk.launcher.AppRuntimeEventCenter$MiniAppStateMessage{
+    public int what;
+    public com.tencent.qqmini.sdk.launcher.BaseRuntimeLoader appRuntimeLoader;
+    public java.lang.Object obj;
+}
+public abstract com.tencent.qqmini.sdk.launcher.AppRuntimeEventCenter$RuntimeStateObserver{
+    public void <init>();
+}
+public com.tencent.qqmini.sdk.launcher.AppRuntimeLoaderManager{
+    public static com.tencent.qqmini.sdk.launcher.AppRuntimeLoaderManager g();
+    public void notifyRuntimeEvent(int,java.lang.Object[]);
+    public com.tencent.qqmini.sdk.launcher.BaseRuntimeLoader getCurrentRunTimeLoader();
+    public void addAppEventObserver(com.tencent.qqmini.sdk.launcher.AppRuntimeEventCenter$RuntimeStateObserver);
+    public void removeRuntimeLoader(com.tencent.qqmini.sdk.launcher.BaseRuntimeLoader);
+}
+public com.tencent.qqmini.sdk.launcher.AppStateManager{
+    public boolean isFlutter;
+}
+public abstract com.tencent.qqmini.sdk.launcher.BaseRuntimeLoader{
+    public void <init>(android.content.Context);
+    public void notifyRuntimeEvent(int,java.lang.Object[]);
+    public boolean isLoadSucceed();
+    public void loadMiniAppInfo(com.tencent.qqmini.sdk.launcher.model.MiniAppInfo);
+    public com.tencent.qqmini.sdk.core.BaseRuntime getRuntime();
+    public com.tencent.qqmini.sdk.launcher.model.MiniAppInfo getMiniAppInfo();
+    public com.tencent.qqmini.sdk.launcher.model.MiniAppInfo getMiniAppInfoForReport();
+    public void onTaskDone(com.tencent.qqmini.sdk.task.BaseTask);
+    public com.tencent.qqmini.sdk.task.BaseTask getTask(java.lang.Class);
+}
+public abstract com.tencent.qqmini.sdk.launcher.BaseUIProxy{
+    public void <init>();
+    public void onCreate(android.app.Activity,android.os.Bundle,android.view.ViewGroup);
+    public void onResume(android.app.Activity);
+    public void onPause(android.app.Activity);
+    public boolean onBackPressed(android.app.Activity);
+}
+public com.tencent.qqmini.sdk.launcher.MiniGameSDK{
+    public static com.tencent.qqmini.sdk.launcher.MiniGameSDK getInstance();
+    public void setActivity(android.app.Activity);
+    public void setMiniAppInfo(com.tencent.qqmini.sdk.launcher.model.MiniAppInfo);
+    public android.app.Activity getActivity();
+    public com.tencent.qqmini.sdk.launcher.model.MiniAppInfo getMiniAppInfo();
+}
+public com.tencent.qqmini.sdk.manager.ApkgManager{
+    public static com.tencent.qqmini.sdk.manager.ApkgManager getInstance();
+    public static java.lang.String getApkgFolderPath(com.tencent.qqmini.sdk.launcher.model.MiniAppInfo);
+    public static java.lang.String getGpkgPluginFolderPath(com.tencent.qqmini.sdk.launcher.model.MiniGamePluginInfo);
+    public static java.lang.String getPkgRoot(com.tencent.qqmini.sdk.launcher.model.MiniAppInfo);
+    public void downloadSubPack(com.tencent.qqmini.sdk.core.model.ApkgInfo,com.tencent.qqmini.sdk.launcher.model.MiniAppInfo,java.lang.String,com.tencent.qqmini.sdk.manager.ApkgManager$OnInitApkgListener);
+}
+public com.tencent.qqmini.sdk.manager.BaseLibManager{
+    public static com.tencent.qqmini.sdk.manager.BaseLibManager g();
+    public java.lang.String getBaseLibDir(java.lang.String,java.lang.String);
+    public com.tencent.qqmini.sdk.launcher.model.BaseLibInfo getBaseLibInfo();
+    public boolean isBaseLibDirValid4MiniGame(java.lang.String);
+}
+public com.tencent.qqmini.sdk.manager.EngineChannel{
+    public void <init>();
+    public void setReceiver(com.tencent.qqmini.sdk.manager.EngineChannel$Receiver);
+    public void send(int,android.os.Bundle);
+    public void setName(java.lang.String);
+}
+public com.tencent.qqmini.sdk.manager.EngineVersion{
+    public java.lang.String mMinor;
+    public void <init>(java.lang.String,java.lang.String);
+    public void <init>(java.lang.String);
+    public int compareTo(com.tencent.qqmini.sdk.manager.EngineVersion);
+    public static com.tencent.qqmini.sdk.manager.EngineVersion fromFolderName(java.lang.String);
+    public static int compareVersion(java.lang.String,java.lang.String);
+}
+public com.tencent.qqmini.sdk.manager.InstalledEngine{
+    public java.lang.String engineName;
+    public java.lang.String engineDir;
+    public com.tencent.qqmini.sdk.manager.EngineVersion engineVersion;
+    public int engineType;
+    public boolean isVerify;
+    public boolean isPersist;
+    public volatile int loadStatus;
+    public void <init>();
+}
+public com.tencent.qqmini.sdk.manager.LoginManager{
+    public static com.tencent.qqmini.sdk.manager.LoginManager getInstance();
+    public java.lang.String getAccount();
+}
+public com.tencent.qqmini.sdk.monitor.ui.MiniAppMonitorInfoView{
+    public void <init>(android.content.Context,android.util.AttributeSet,int);
+    public void startRefreshMonitorUi();
+    public void stopRefreshMonitorUi();
+    public void updateFPSText(double);
+    public void setMiniAppType(int);
+}
+public com.tencent.qqmini.sdk.report.MiniAppReportManager2{
+    public static void reportLaunchPiecewise(int,java.lang.String,com.tencent.qqmini.sdk.launcher.model.MiniAppInfo);
+    public static void reportPageView(java.lang.String,java.lang.String,java.lang.String,com.tencent.qqmini.sdk.launcher.model.MiniAppInfo);
+}
+public com.tencent.qqmini.sdk.report.MiniAppStartState{
+    public static void setBaseLibDownload(java.lang.String,boolean);
+    public static void setBaseLibLoad(java.lang.String,boolean);
+    public static void setApkgDownload(java.lang.String,boolean);
+}
+public com.tencent.qqmini.sdk.report.MiniGamePerformanceStatics{
+    public void <init>();
+    public void recordInitialMemory();
+    public void startReport();
+    public void stopReport();
+    public void onGetFps(float);
+    public void setMiniAppInfo(com.tencent.qqmini.sdk.launcher.model.MiniAppInfo);
+}
+public com.tencent.qqmini.sdk.report.MiniGdtReporter{
+    public static void report(com.tencent.qqmini.sdk.launcher.model.MiniAppInfo,int);
+}
+public com.tencent.qqmini.sdk.report.MiniProgramLpReportDC04902{
+    public static void reportGameStart();
+    public static void accumulateDrawFrameDuration(long);
+    public static void updateDisplayFrameTime(long,boolean);
+}
+public com.tencent.qqmini.sdk.report.MiniProgramReportHelper{
+    public static com.tencent.qqmini.sdk.launcher.model.MiniAppInfo miniAppConfigForPreload();
+}
+public com.tencent.qqmini.sdk.report.MiniProgramReporter{
+    public static com.tencent.qqmini.sdk.report.MiniProgramReporter getInstance();
+    public android.os.Handler getReportHandler();
+}
+public com.tencent.qqmini.sdk.report.MiniReportManager{
+    public static void reportEventType(com.tencent.qqmini.sdk.launcher.model.MiniAppInfo,int,java.lang.String);
+    public static void reportEventType(com.tencent.qqmini.sdk.launcher.model.MiniAppInfo,int,java.lang.String,long);
+    public static void reportEventType(com.tencent.qqmini.sdk.launcher.model.MiniAppInfo,int,java.lang.String,java.lang.String);
+    public static void reportEventType(com.tencent.qqmini.sdk.launcher.model.MiniAppInfo,int,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,long,java.lang.String);
+    public static void reportJsError(java.lang.String,com.tencent.qqmini.sdk.launcher.model.MiniAppInfo,java.lang.String);
+    public static void addCostTimeEventAttachInfo(com.tencent.qqmini.sdk.launcher.model.MiniAppInfo,int,java.lang.String);
+    public static java.lang.String getAppType(com.tencent.qqmini.sdk.launcher.model.MiniAppInfo);
+}
+public com.tencent.qqmini.sdk.report.SDKMiniProgramLpReportDC04239{
+    public static void reportPageView(com.tencent.qqmini.sdk.launcher.model.MiniAppInfo,java.lang.String,java.lang.String,java.lang.String,java.lang.String);
+    public static void reportForSDK(com.tencent.qqmini.sdk.launcher.model.MiniAppInfo,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String);
+    public static void deleteRecordDurationMsg();
+}
+public abstract com.tencent.qqmini.sdk.task.AsyncTask{
+    public void <init>(android.content.Context,com.tencent.qqmini.sdk.launcher.BaseRuntimeLoader);
+}
+public abstract com.tencent.qqmini.sdk.task.BaseTask{
+    public int retCode;
+    public java.lang.String msg;
+    public com.tencent.qqmini.sdk.task.BaseTask addDependTask(com.tencent.qqmini.sdk.task.BaseTask);
+    public boolean isDone();
+    public boolean isSucceed();
+}
+public abstract com.tencent.qqmini.sdk.task.MainThreadTask{
+    public void <init>(android.content.Context,com.tencent.qqmini.sdk.launcher.BaseRuntimeLoader);
+}
+public com.tencent.qqmini.sdk.utils.DebugUtil{
+    public static java.lang.String getPrintableStackTrace(java.lang.Throwable);
+    public static java.lang.String getStackTrace();
+    public static boolean isDebugVersion();
+}
+public com.tencent.qqmini.sdk.utils.ImmersiveUtils{
+    public static boolean setStatusTextColor(boolean,android.view.Window);
+}
+public com.tencent.qqmini.sdk.utils.MiniAppClassloader{
+    public void <init>(java.lang.String,java.lang.String,java.lang.ClassLoader);
+}
+public com.tencent.qqmini.sdk.utils.MiniAppLauncher{
+    public static boolean isMiniAppUrl(java.lang.String);
+}
+public com.tencent.qqmini.sdk.utils.MiniAppUtils{
+    public static boolean isFromPullDownEntry(com.tencent.qqmini.sdk.launcher.model.MiniAppInfo);
+}
+public com.tencent.qqmini.sdk.utils.MiniSDKConst{
+    public static final java.lang.String STR_WXFILE;
+    public static final java.lang.String MINI_LOG_PATH;
+}
+public com.tencent.qqmini.sdk.utils.ProcessUtil{
+    public static void exitProcess(com.tencent.qqmini.sdk.core.IMiniAppContext);
+}
+public com.tencent.qqmini.sdk.utils.QUAUtil{
+    public static java.lang.String getQUA();
+    public static java.lang.String getPlatformQUA();
+    public static java.lang.String getWebViewUA();
+    public static java.lang.String getLoginType();
+    public static boolean isQQApp();
+    public static java.lang.String getSimpleDeviceInfo(android.content.Context);
+}
+public com.tencent.qqmini.sdk.utils.ViewUtils{
+    public static int getScreenWidth();
+    public static int getScreenHeight();
+}
+public com.tencent.qqmini.sdk.utils.WnsUtil{
+    public static java.lang.String defaultShareImg();
+}

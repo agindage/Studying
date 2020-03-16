@@ -1,0 +1,85 @@
+plugins {
+    id 'java'
+    id 'maven'
+    id "com.google.protobuf" version "0.8.7"
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'org.ow2.asm', name: 'asm', version: '7.2'
+    compile group: 'org.ow2.asm', name: 'asm-commons', version: '7.2'
+    compile group: 'org.ow2.asm', name: 'asm-util', version: '7.2'
+//    compile group: 'org.javassist', name: 'javassist', version: '3.26.0-GA'
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
+    compile group: 'commons-codec', name: 'commons-codec', version: '1.13'
+    compile group: 'com.google.protobuf', name: 'protobuf-java', version: '3.11.3'
+}
+
+group='com.tencent.tools'
+archivesBaseName='bytecodeanalysis'
+version='1.0.0'
+
+sourceCompatibility = 1.8
+
+ext {
+    userName=System.getenv("MAVEN_USERNAME")
+    mavenToken=System.getenv("MAVEN_TOKEN")
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.tencent.tools.analysis.ByteCodeAnalysis'
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }}
+
+    into('assets'){
+        from 'assets'
+    }
+}
+
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri(project.rootProject.file("devops_tools/byte_code_analysis_repo")))
+        }
+        //软件源服务，同时只能生效一个都设置上会用最后一个
+        if (version.toString().endsWith("SNAPSHOT")) {
+//            mavenDeployer {
+//                repository(url: 'https://mirrors.tencent.com/repository/maven/thirdparty-snapshots'){
+//                    //请记得修改这个userName和password
+//                    authentication(userName: project.ext.userName, password: project.ext.mavenToken)
+//                }
+//            }
+//            mavenDeployer {
+//                repository(url: 'http://maven.oa.com/nexus/content/repositories/thirdparty-snapshots'){
+//                    authentication(userName: 'rdm', password: 'rdm')
+//                }
+//            }
+        }
+    }
+}
+
+task uploadMyArchives(dependsOn:[build,uploadArchives]) {
+}
+
+protobuf {
+    generatedFilesBaseDir = "$projectDir/src"
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.11.3'
+    }
+}
