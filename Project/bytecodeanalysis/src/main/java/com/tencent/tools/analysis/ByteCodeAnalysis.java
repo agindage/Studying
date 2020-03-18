@@ -62,7 +62,7 @@ public class ByteCodeAnalysis {
     static long sStartTime;
     public static void main(String[] args){
         if (args == null || args.length == 0){
-            args = "-d D:\\Workspace\\MiniApp\\lib_minisdk\\build\\outputs\\aar\\lib_minisdk-debug.aar -s D:\\Workspace\\MiniApp\\lib_minigame\\build\\outputs\\aar\\lib_minigame-debug.aar -s D:\\Workspace\\MiniApp\\lib_miniapp\\build\\outputs\\aar\\lib_miniapp-debug.aar".split(" ");
+            args = "-d /Users/duojianwu/workspace_git/MiniSDK/lib_minisdk/build/outputs/aar/lib_minisdk-debug.aar -s /Users/duojianwu/workspace_git/MiniSDK/lib_minigame/build/outputs/aar/lib_minigame-debug.aar -s /Users/duojianwu/workspace_git/MiniSDK/lib_miniapp/build/outputs/aar/lib_miniapp-debug.aar".split(" ");
         }
         sStartTime = System.currentTimeMillis();
         parseArgs(args);
@@ -237,13 +237,14 @@ public class ByteCodeAnalysis {
     }
 
     private static String restoreDependDetail(Set<String> methodAndFields, ClassNode clsNode) throws Exception {
-        if (methodAndFields == null || methodAndFields.size() == 0){
-            return "{}";
-        }
+//        if (methodAndFields == null || methodAndFields.size() == 0){
+//            return "{}";
+//        }
         StringBuilder result = new StringBuilder();
         try {
             //类名
-            result.append(ByteCodeTools.convertAccessFlagToString(clsNode.access) + ByteCodeTools.convertByteCodeOwnerToOrigin(clsNode.name));
+//            result.append(ByteCodeTools.convertAccessFlagToString(clsNode.access) + ByteCodeTools.convertByteCodeOwnerToOrigin(clsNode.name));
+            result.append("-keep class " + ByteCodeTools.convertByteCodeOwnerToOrigin(clsNode.name));
             result.append("{\n");
 
             for (FieldNode fieldNode : clsNode.fields) {
