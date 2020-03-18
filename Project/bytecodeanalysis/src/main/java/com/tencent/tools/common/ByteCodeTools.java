@@ -141,7 +141,7 @@ public class ByteCodeTools {
      *      true - 如果是则返回true；否则为false
      * */
     public static boolean isMethod(String methodDesc){
-        final boolean matches = Pattern.matches("^\\([\\s\\S]*\\)[ISJZCBFDVL][\\s\\S]*", methodDesc);
+        final boolean matches = Pattern.matches("^\\([\\s\\S]*\\)[ISJZCBFDVL\\[][\\s\\S]*", methodDesc);
         return matches;//返回true
     }
 
